@@ -1,0 +1,28 @@
+<div class="header">
+  <div
+    class="d-flex mr-3"
+    [matMenuTriggerFor]="menu">
+    <mat-icon>menu</mat-icon>
+  </div>
+</div>
+
+<mat-menu #menu="matMenu">
+  <button
+    mat-menu-item
+    *ngIf="!authService.isAuthenticated()"
+    routerLink="/login">
+    <span class="user-item">Sign In</span>
+  </button>
+  <button
+    mat-menu-item
+    *ngIf="!authService.isAuthenticated()"
+    routerLink="/signup">
+    <span class="user-item">Sign Up</span>
+  </button>
+  <button
+    mat-menu-item
+    *ngIf="authService.isAuthenticated()"
+    (click)="signOut()">
+    <span class="user-item">Sign Out</span>
+  </button>
+</mat-menu>

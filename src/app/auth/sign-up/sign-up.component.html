@@ -1,0 +1,37 @@
+<form
+  class="form-group"
+  autocomplete="off"
+  (submit)="onSignUp()"
+  [formGroup]="form">
+  <mat-form-field>
+    <mat-label>Email</mat-label>
+    <input
+      matInput
+      type="text"
+      maxlength="100"
+      formControlName="Email"
+      [placeholder]="Email">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Password</mat-label>
+    <input
+      matInput
+      type="password"
+      maxlength="100"
+      formControlName="Password"
+      [placeholder]="Password">
+
+    <mat-hint
+      *ngIf="form.valid"
+      class="has-error">
+      {{error}}
+    </mat-hint>
+  </mat-form-field>
+  <button
+    mat-button
+    type="submit"
+    [color]="'primary'"
+    [disabled]="form.invalid">
+    Sing Up
+  </button>
+</form>
