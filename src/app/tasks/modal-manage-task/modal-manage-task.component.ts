@@ -41,13 +41,14 @@ export class ModalManageTaskComponent implements OnInit {
       this.task.Status = this.form.value.Status;
 
       if (this.modalData.isNew) {
-        this.task.Key = await this.taskService.post(this.form.value);
+        const name: any = await this.taskService.post(this.form.value);
+        this.task.Key = name.name;
       } else {
         await this.taskService.put(this.task);
       }
       this.dialogRef.close(this.task);
-    } catch (e) {
-      console.log(e);
+    } catch (error) {
+      console.error(error);
     }
   }
 }

@@ -25,7 +25,7 @@ export class SignInComponent implements OnInit {
     });
   }
 
-  async onSignIn(): Promise<void> {
-    await this.authService.signIn(this.form.value);
+  onSignIn() {
+    this.authService.signIn(this.form.value);
   }
 }

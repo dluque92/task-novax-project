@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { MatDialog, MatTableDataSource } from '@angular/material';
+import { MatDialog, MatTableDataSource, MatSnackBar } from '@angular/material';
 
 import { Task } from '../../core/interfaces/common.interface';
 import { TaskService } from '../../shared/services/task.service';
@@ -18,23 +18,29 @@ export class TaskListComponent implements OnInit {
 
   constructor(
     private taskService: TaskService,
-    public dialog: MatDialog) { }
+    public dialog: MatDialog,
+    public snackBar: MatSnackBar
+  ) { }
 
   async ngOnInit() {
-    const data = await this.taskService.get();
+    try {
+      const data = await this.taskService.get();
 
-    Object.keys(data).forEach((key: string) => {
-      const task: Task = {
-        Key: key,
-        Name: data[key].Name,
-        Description: data[key].Description,
-        Status: data[key].Status
-      };
+      Object.keys(data).forEach((key: string) => {
+        const task: Task = {
+          Key: key,
+          Name: data[key].Name,
+          Description: data[key].Description,
+          Status: data[key].Status
+        };
 
-      this.taskList.push(task);
-    });
+        this.taskList.push(task);
+      });
 
-    this.dataSource.data = this.taskList;
+      this.dataSource.data = this.taskList;
+    } catch (error) {
+      this.snackBar.open(error.message, 'Ok');
+    }
   }
 
   applyFilter(filterValue: string) {
@@ -65,5 +71,44 @@ export class TaskListComponent implements OnInit {
         this.dataSource.data = this.taskList;
       }
     });
+  }
+
+  openEditTaskDialog(taskToEdit: Task): void {
+    const config = {
+      width: '500px',
+      data: {
+        caption: 'Edit Task',
+        isNew: false,
+        secondBtnName: 'Save',
+        task: {
+          Key: taskToEdit.Key,
+          Name: taskToEdit.Name,
+          Description: taskToEdit.Description,
+          Status: taskToEdit.Status
+        }
+      }
+    };
+
+    const modal = this.dialog.open(ModalManageTaskComponent, config);
+
+    modal.afterClosed().subscribe((task: Task) => {
+      if (task) {
+        const index = this.taskList.findIndex(item => item.Key === taskToEdit.Key);
+
+        this.taskList[index] = task;
+        this.dataSource.data = this.taskList;
+      }
+    });
+  }
+
+  async removeTask(taskToDelete: Task): Promise<void> {
+    try {
+      await this.taskService.delete(taskToDelete);
+
+      this.taskList = this.taskList.filter(item => item.Key !== taskToDelete.Key);
+      this.dataSource.data = this.taskList;
+    } catch (error) {
+      this.snackBar.open(error.message, 'Ok');
+    }
   }
 }

@@ -12,12 +12,17 @@
 </div>
 <ng-container *ngIf="dataSource.data.length; else noSource">
   <div class="row m-4">
-    <mat-form-field>
-      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+    <mat-form-field class="w-50">
+      <input
+        matInput
+        (keyup)="applyFilter($event.target.value)"
+        placeholder="Filter">
     </mat-form-field>
   </div>
   <div class="mat-elevation-z8 m-4">
-    <table mat-table [dataSource]="dataSource">
+    <table
+      mat-table
+      [dataSource]="dataSource">
 
       <ng-container matColumnDef="Name">
         <th mat-header-cell *matHeaderCellDef> Name </th>
@@ -43,11 +48,15 @@
             <mat-icon>more_vert</mat-icon>
           </button>
           <mat-menu #menu="matMenu">
-            <button mat-menu-item>
+            <button
+              mat-menu-item
+              (click)="openEditTaskDialog(element)">
               <mat-icon>edit</mat-icon>
               <span>Edit</span>
             </button>
-            <button mat-menu-item>
+            <button
+              mat-menu-item
+              (click)="removeTask(element)">
               <mat-icon>delete</mat-icon>
               <span>Delete</span>
             </button>
@@ -71,4 +80,3 @@
     No tasks created yet, please create a new one.
   </div>
 </ng-template>
-

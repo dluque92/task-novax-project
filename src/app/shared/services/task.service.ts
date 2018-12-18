@@ -38,7 +38,30 @@ export class TaskService {
     }
   }
 
-  put(editedTask: Task): void { }
+  async put(editedTask: Task): Promise<Task> {
+    try {
+      const token = await this.authService.getToken();
+      const url = '/' + editedTask.Key + '.json?auth=' + token;
+      const editedData = {
+        Name: editedTask.Name,
+        Description: editedTask.Description,
+        Status: editedTask.Status
+      };
 
-  delete(deleteTask: Task): void { }
+      return await this.http.put<Task>(BACKEND_URL + url, editedData).toPromise();
+    } catch (error) {
+      throw (error as HttpErrorResponse).message;
+    }
+  }
+
+  async delete(deleteTask: Task): Promise<Task> {
+    try {
+      const token = this.authService.getToken();
+      const url = '/' + deleteTask.Key + '.json?auth=' + token;
+
+      return await this.http.delete<Task>(BACKEND_URL + url).toPromise();
+    } catch (error) {
+      throw (error as HttpErrorResponse).message;
+    }
+  }
 }

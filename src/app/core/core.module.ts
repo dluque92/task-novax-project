@@ -27,7 +27,8 @@ import {
   MatDatepickerModule,
   MatProgressBarModule,
   MatSlideToggleModule,
-  MatRadioModule
+  MatRadioModule,
+  MatSnackBarModule
 } from '@angular/material';
 
 @NgModule({
@@ -59,7 +60,8 @@ import {
     MatDatepickerModule,
     MatProgressBarModule,
     MatRadioModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatSnackBarModule
   ],
   exports: [
     BrowserAnimationsModule,
@@ -89,7 +91,8 @@ import {
     MatProgressBarModule,
     MatDatepickerModule,
     MatRadioModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatSnackBarModule
   ],
   declarations: []
 })

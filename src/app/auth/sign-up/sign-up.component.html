@@ -1,37 +1,50 @@
-<form
-  class="form-group"
-  autocomplete="off"
-  (submit)="onSignUp()"
-  [formGroup]="form">
-  <mat-form-field>
-    <mat-label>Email</mat-label>
-    <input
-      matInput
-      type="text"
-      maxlength="100"
-      formControlName="Email"
-      [placeholder]="Email">
-  </mat-form-field>
-  <mat-form-field>
-    <mat-label>Password</mat-label>
-    <input
-      matInput
-      type="password"
-      maxlength="100"
-      formControlName="Password"
-      [placeholder]="Password">
-
-    <mat-hint
-      *ngIf="form.valid"
-      class="has-error">
-      {{error}}
-    </mat-hint>
-  </mat-form-field>
-  <button
-    mat-button
-    type="submit"
-    [color]="'primary'"
-    [disabled]="form.invalid">
-    Sing Up
-  </button>
-</form>
+<div class="d-flex justify-content-center mt-4 mb-4">
+  <mat-card class="w-75 justify-content-center">
+    <mat-card-header>
+      <mat-card-title>
+        Register New User
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form
+        class="w-100 justify-content-center"
+        autocomplete="off"
+        (submit)="onSignUp()"
+        [formGroup]="form">
+        <div class="row justify-content-center">
+          <mat-form-field class="w-75">
+            <mat-label>Email</mat-label>
+            <input
+              matInput
+              type="text"
+              maxlength="100"
+              label="Email"
+              formControlName="Email"
+              [placeholder]="Email">
+          </mat-form-field>
+        </div>
+        <div class="row justify-content-center">
+          <mat-form-field class="w-75">
+            <mat-label>Password</mat-label>
+            <input
+              matInput
+              type="password"
+              maxlength="100"
+              label="Password"
+              formControlName="Password"
+              [placeholder]="Password">
+          </mat-form-field>
+        </div>
+        <div class="row justify-content-center">
+          <button
+            mat-raised-button
+            type="submit"
+            [color]="'primary'"
+            [disabled]="form.invalid">
+            Sing Up
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
