@@ -11,7 +11,9 @@ import { SignUpComponent } from './auth/sign-up/sign-up.component';
 import { TaskListComponent } from './tasks/task-list/task-list.component';
 import { AuthService } from './shared/services/auth.service';
 import { AuthGuardService } from './shared/services/auth-guard.service';
+import { TaskService } from './shared/services/task.service';
 import { HeaderComponent } from './core/header/header.component';
+import { ModalManageTaskComponent } from './tasks/modal-manage-task/modal-manage-task.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,8 @@ import { HeaderComponent } from './core/header/header.component';
     HeaderComponent,
     SignInComponent,
     SignUpComponent,
-    TaskListComponent
+    TaskListComponent,
+    ModalManageTaskComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +33,8 @@ import { HeaderComponent } from './core/header/header.component';
 
     HttpClientModule
   ],
-  providers: [AuthService, AuthGuardService],
+  entryComponents: [ModalManageTaskComponent],
+  providers: [AuthService, AuthGuardService, TaskService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
