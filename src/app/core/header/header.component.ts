@@ -18,7 +18,7 @@ export class HeaderComponent {
     this.router.navigate(['/login']);
   }
 
-  isAuthenticated() {
-    this.authService.isAuthenticated();
+  isAuthenticated(): boolean {
+    return this.authService.isAuthenticated();
   }
 }

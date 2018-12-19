@@ -9,19 +9,19 @@
 <mat-menu #menu="matMenu">
   <button
     mat-menu-item
-    *ngIf="!authService.isAuthenticated()"
+    *ngIf="!isAuthenticated()"
     routerLink="/login">
     <span class="user-item">Sign In</span>
   </button>
   <button
     mat-menu-item
-    *ngIf="!authService.isAuthenticated()"
+    *ngIf="!isAuthenticated()"
     routerLink="/signup">
     <span class="user-item">Sign Up</span>
   </button>
   <button
     mat-menu-item
-    *ngIf="authService.isAuthenticated()"
+    *ngIf="isAuthenticated()"
     (click)="signOut()">
     <span class="user-item">Sign Out</span>
   </button>
